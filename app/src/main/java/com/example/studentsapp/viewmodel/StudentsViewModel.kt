@@ -35,7 +35,6 @@ class StudentsViewModel : ViewModel() {
     }
 
     fun toggleStudentCheck(student: Student) {
-        student.isChecked = !student.isChecked
         Model.instance.updateStudent(student.id, student)
         refreshStudents()
     }
