@@ -25,6 +25,10 @@ class StudentDetailsActivity : AppCompatActivity() {
             }
             startActivity(intent)
         }
+
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
     }
 
     override fun onResume() {
