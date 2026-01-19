@@ -35,11 +35,11 @@ class StudentListActivity : AppCompatActivity() {
             students = emptyList(),
             onRowClick = { student ->
                 val intent = Intent(this, StudentDetailsActivity::class.java).apply {
-                    putExtra("STUDENT_ID", student.id)
+                    putExtra(StudentDetailsActivity.STUDENT_ID_KEY, student.id)
                 }
                 startActivity(intent)
             },
-            onCheckChanged = { student ->
+            onStudentCheckChanged = { student ->
                 viewModel.toggleStudentCheck(student)
             }
         )

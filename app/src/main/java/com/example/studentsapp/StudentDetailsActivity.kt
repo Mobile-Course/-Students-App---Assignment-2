@@ -11,17 +11,21 @@ class StudentDetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStudentDetailsBinding
     private var studentId: String? = null
 
+    companion object {
+        const val STUDENT_ID_KEY = "STUDENT_ID"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityStudentDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        studentId = intent.getStringExtra("STUDENT_ID")
+        studentId = intent.getStringExtra(STUDENT_ID_KEY)
         loadStudentData()
 
         binding.btnEdit.setOnClickListener {
             val intent = Intent(this, EditStudentActivity::class.java).apply {
-                putExtra("STUDENT_ID", studentId)
+                putExtra(STUDENT_ID_KEY, studentId)
             }
             startActivity(intent)
         }

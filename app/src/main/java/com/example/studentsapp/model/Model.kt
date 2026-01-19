@@ -1,5 +1,9 @@
 package com.example.studentsapp.model
 
+/**
+ * Singleton class to manage the data (Students).
+ * Simulates a local database or data source.
+ */
 class Model private constructor() {
 
     private val students = mutableListOf<Student>()
@@ -13,7 +17,15 @@ class Model private constructor() {
     init {
         // Add some initial data for testing
         for (i in 0..15) {
-            students.add(Student("Student $i", "$i", "050-123456$i", "Street $i", false))
+            students.add(
+                Student(
+                    name = "Student $i",
+                    id = "$i",
+                    phone = "050-123456$i",
+                    address = "Street $i",
+                    isChecked = false
+                )
+            )
         }
     }
 

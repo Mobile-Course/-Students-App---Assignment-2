@@ -19,7 +19,7 @@ class EditStudentActivity : AppCompatActivity() {
         binding = ActivityEditStudentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        oldStudentId = intent.getStringExtra("STUDENT_ID")
+        oldStudentId = intent.getStringExtra(StudentDetailsActivity.STUDENT_ID_KEY)
         loadStudentData()
         setupListeners()
     }

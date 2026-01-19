@@ -6,35 +6,46 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.studentsapp.databinding.StudentListRowBinding
 import com.example.studentsapp.model.Student
 
+/**
+ * Adapter for the RecyclerView in StudentListActivity.
+ * Handles displaying a list of Student objects.
+ */
 class StudentAdapter(
     private var students: List<Student>,
     private val onRowClick: (Student) -> Unit,
-    private val onCheckChanged: (Student) -> Unit
+    private val onStudentCheckChanged: (Student) -> Unit
 ) : RecyclerView.Adapter<StudentAdapter.StudentViewHolder>() {
 
     class StudentViewHolder(val binding: StudentListRowBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentViewHolder {
-        val binding = StudentListRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = StudentListRowBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
         return StudentViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: StudentViewHolder, position: Int) {
         val student = students[position]
-        holder.binding.studentRowName.text = student.name
-        holder.binding.studentRowId.text = "ID: ${student.id}"
         
-        // Temporarily remove listener to avoid triggering it when setting state
-        holder.binding.studentRowCheckbox.setOnCheckedChangeListener(null)
-        holder.binding.studentRowCheckbox.isChecked = student.isChecked
-        
-        holder.binding.studentRowCheckbox.setOnCheckedChangeListener { _, isChecked ->
-            student.isChecked = isChecked // Update instance directly or via callback
-            onCheckChanged(student)
-        }
+        with(holder.binding) {
+            studentRowName.text = student.name
+            studentRowId.text = "ID: ${student.id}"
 
-        holder.binding.root.setOnClickListener {
-            onRowClick(student)
+            // Temporarily remove listener to avoid triggering it when setting state
+            studentRowCheckbox.setOnCheckedChangeListener(null)
+            studentRowCheckbox.isChecked = student.isChecked
+
+            studentRowCheckbox.setOnCheckedChangeListener { _, isChecked ->
+                student.isChecked = isChecked
+                onStudentCheckChanged(student)
+            }
+
+            root.setOnClickListener {
+                onRowClick(student)
+            }
         }
     }
 
